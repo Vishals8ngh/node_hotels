@@ -60,9 +60,11 @@
 const express = require('express')
 const app = express();
 const db = require('./db');
+require('dotenv').config();
 
 const bodyParser=require('body-parser');
 app.use(bodyParser.json());
+const PORT = process.env.PORT || 4000;
 
 
 const Person = require('./models1/person');
@@ -98,14 +100,10 @@ app.get('/person',async(req,res)=>{
     const data = await Person.find();
     console.log('data fetched');
     res.status(200).json(data);
-
-
   }catch(err){
     console.log(err);
     res.status(500).json({error:'Internal server error'});
-
   }
-  
 })
 
 app.post('/menu',async(req,res)=>{
@@ -179,9 +177,8 @@ app.use('/person',personRoutes);
 //   res.send('Hello World .... how can help you ')
 // })
 
-// app.get('/chicken', function (req, res) {
-//     res.send('Hello rudra how are you')
-//   })
+
+
 
 
   
